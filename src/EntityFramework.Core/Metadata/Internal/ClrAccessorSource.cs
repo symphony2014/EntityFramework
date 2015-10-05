@@ -2,7 +2,6 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
 using System.Reflection;
 using JetBrains.Annotations;
 using Microsoft.Data.Entity.Internal;
@@ -13,7 +12,7 @@ namespace Microsoft.Data.Entity.Metadata.Internal
         where TAccessor : class
     {
         private static readonly MethodInfo _genericCreate
-            = typeof(ClrAccessorSource<TAccessor>).GetTypeInfo().GetDeclaredMethods("CreateGeneric").Single();
+            = typeof(ClrAccessorSource<TAccessor>).GetTypeInfo().GetDeclaredMethod(nameof(CreateGeneric));
 
         private readonly ThreadSafeDictionaryCache<Tuple<Type, string>, TAccessor> _cache
             = new ThreadSafeDictionaryCache<Tuple<Type, string>, TAccessor>();
