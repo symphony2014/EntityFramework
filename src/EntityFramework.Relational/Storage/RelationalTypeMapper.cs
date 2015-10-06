@@ -28,6 +28,18 @@ namespace Microsoft.Data.Entity.Storage
 
         public virtual RelationalTypeMapping GetMapping(IProperty property)
         {
+            var mapping = FindMapping(property);
+
+            if (mapping != null)
+            {
+                return mapping;
+            }
+
+            throw new NotSupportedException(RelationalStrings.UnsupportedType(property.ClrType.Name));
+        }
+
+        public virtual RelationalTypeMapping FindMapping(IProperty property)
+        {
             Check.NotNull(property, nameof(property));
 
             RelationalTypeMapping mapping = null;
@@ -40,17 +52,28 @@ namespace Microsoft.Data.Entity.Storage
             }
 
             return mapping
-                   ?? (SimpleMappings.TryGetValue(property.ClrType.UnwrapEnumType().UnwrapNullableType(), out mapping)
-                       ? mapping
-                       : GetCustomMapping(property));
+                   ?? FindMapping(property.ClrType)
+                   ?? FindCustomMapping(property);
         }
 
-        public virtual RelationalTypeMapping GetMapping(Type clrType)
+        public virtual RelationalTypeMapping FindMapping([NotNull] Type clrType)
         {
             Check.NotNull(clrType, nameof(clrType));
 
             RelationalTypeMapping mapping;
-            if (SimpleMappings.TryGetValue(clrType.UnwrapEnumType(), out mapping))
+            if (SimpleMappings.TryGetValue(clrType.UnwrapNullableType().UnwrapEnumType(), out mapping))
+            {
+                return mapping;
+            }
+
+            return null;
+        }
+
+        public virtual RelationalTypeMapping GetMapping(Type clrType)
+        {
+            var mapping = FindMapping(clrType);
+
+            if (mapping != null)
             {
                 return mapping;
             }
@@ -58,9 +81,20 @@ namespace Microsoft.Data.Entity.Storage
             throw new NotSupportedException(RelationalStrings.UnsupportedType(clrType.Name));
         }
 
+        public virtual bool IsTypeMapped(Type clrType) => FindMapping(clrType) != null;
+
+        protected virtual RelationalTypeMapping FindCustomMapping([NotNull] IProperty property) => null;
+
         protected virtual RelationalTypeMapping GetCustomMapping([NotNull] IProperty property)
         {
             Check.NotNull(property, nameof(property));
+
+            var mapping = FindCustomMapping(property);
+
+            if (mapping != null)
+            {
+                return mapping;
+            }
 
             throw new NotSupportedException(RelationalStrings.UnsupportedType(property.ClrType.Name));
         }

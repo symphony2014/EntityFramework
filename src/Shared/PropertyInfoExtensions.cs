@@ -19,7 +19,7 @@ namespace System.Reflection
                && propertyInfo.CanRead
                && propertyInfo.CanWrite;
 
-        public static Type FindCandidateNavigationPropertyType(this PropertyInfo propertyInfo)
+        public static Type FindCandidateNavigationPropertyType(this PropertyInfo propertyInfo, Func<Type, bool> isPrimitiveProperty)
         {
             if (!propertyInfo.IsCandidateProperty())
             {
@@ -31,7 +31,7 @@ namespace System.Reflection
             targetType = targetType.UnwrapNullableType();
 
             var typeInfo = targetType.GetTypeInfo();
-            if (targetType.IsPrimitive()
+            if (isPrimitiveProperty(typeInfo.AsType())
                 || typeInfo.IsValueType
                 || typeInfo.IsInterface)
             {
