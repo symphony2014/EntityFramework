@@ -31,7 +31,7 @@ namespace System.Reflection
             targetType = targetType.UnwrapNullableType();
 
             var typeInfo = targetType.GetTypeInfo();
-            if (isPrimitiveProperty(typeInfo.AsType())
+            if (isPrimitiveProperty(targetType)
                 || typeInfo.IsValueType
                 || typeInfo.IsInterface)
             {

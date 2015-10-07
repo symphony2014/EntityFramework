@@ -176,6 +176,7 @@
     <Compile Include="Metadata\Conventions\Internal\NavigationAttributeNavigationConvention.cs" />
     <Compile Include="Metadata\Conventions\Internal\NavigationAttributeEntityTypeConvention.cs" />
     <Compile Include="Metadata\Conventions\Internal\NotMappedMemberAttributeConvention.cs" />
+    <Compile Include="Metadata\Conventions\Internal\PropertyMappingConvention.cs" />
     <Compile Include="Metadata\Conventions\Internal\RequiredNavigationAttributeConvention.cs" />
     <Compile Include="Metadata\Conventions\Internal\TimestampAttributeConvention.cs" />
     <Compile Include="Metadata\Conventions\Internal\StringLengthAttributeConvention.cs" />

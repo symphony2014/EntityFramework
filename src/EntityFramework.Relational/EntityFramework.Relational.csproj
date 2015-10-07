@@ -72,6 +72,7 @@
     <Compile Include="Metadata\Conventions\Internal\DiscriminatorConvention.cs" />
     <Compile Include="Metadata\Conventions\Internal\RelationalColumnAttributeConvention.cs" />
     <Compile Include="Metadata\Conventions\Internal\RelationalConventionSetBuilder.cs" />
+    <Compile Include="Metadata\Conventions\Internal\RelationalPropertyMappingConvention.cs" />
     <Compile Include="Metadata\Conventions\Internal\RelationalRelationshipDiscoveryConvention.cs" />
     <Compile Include="Metadata\Conventions\Internal\RelationalForeignKeyAttributeConvention.cs" />
     <Compile Include="Metadata\Conventions\Internal\RelationalInversePropertyAttributeConvention.cs" />

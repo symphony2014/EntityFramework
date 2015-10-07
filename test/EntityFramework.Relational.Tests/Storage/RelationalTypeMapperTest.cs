@@ -160,7 +160,7 @@ namespace Microsoft.Data.Entity.Tests.Model
                         { "some_binary(max)", _binary }
                     };
 
-            protected override RelationalTypeMapping GetCustomMapping(IProperty property)
+            protected override RelationalTypeMapping FindCustomMapping(IProperty property)
             {
                 var clrType = property.ClrType.UnwrapEnumType();
 
@@ -174,7 +174,7 @@ namespace Microsoft.Data.Entity.Tests.Model
                             property, 2000,
                             l => new RelationalSizedTypeMapping("just_binary(" + l + ")", l),
                             _unboundedBinary, _binary, _binaryKey, _rowversion)
-                        : base.GetCustomMapping(property);
+                        : base.FindCustomMapping(property);
             }
         }
     }

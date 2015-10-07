@@ -38,7 +38,7 @@ namespace Microsoft.Data.Entity.Storage
             throw new NotSupportedException(RelationalStrings.UnsupportedType(property.ClrType.Name));
         }
 
-        public virtual RelationalTypeMapping FindMapping(IProperty property)
+        public virtual RelationalTypeMapping FindMapping([NotNull] IProperty property)
         {
             Check.NotNull(property, nameof(property));
 
@@ -52,8 +52,8 @@ namespace Microsoft.Data.Entity.Storage
             }
 
             return mapping
-                   ?? FindMapping(property.ClrType)
-                   ?? FindCustomMapping(property);
+                   ?? FindCustomMapping(property)
+                   ?? FindMapping(property.ClrType);
         }
 
         public virtual RelationalTypeMapping FindMapping([NotNull] Type clrType)
@@ -82,6 +82,8 @@ namespace Microsoft.Data.Entity.Storage
         }
 
         public virtual bool IsTypeMapped(Type clrType) => FindMapping(clrType) != null;
+
+        public virtual bool IsPropertyMapped(IProperty property) => FindMapping(property) != null;
 
         protected virtual RelationalTypeMapping FindCustomMapping([NotNull] IProperty property) => null;
 
