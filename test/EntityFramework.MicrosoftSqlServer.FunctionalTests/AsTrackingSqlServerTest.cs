@@ -5,16 +5,11 @@ using Microsoft.Data.Entity.FunctionalTests;
 
 namespace Microsoft.Data.Entity.SqlServer.FunctionalTests
 {
-    public class ChangeTrackingSqlServerTest : ChangeTrackingTestBase<NorthwindQuerySqlServerFixture>
+    public class AsTrackingSqlServerTest : AsTrackingTestBase<NorthwindQuerySqlServerFixture>
     {
-        public ChangeTrackingSqlServerTest(NorthwindQuerySqlServerFixture fixture)
+        public AsTrackingSqlServerTest(NorthwindQuerySqlServerFixture fixture)
             : base(fixture)
         {
-        }
-
-        public override void Precendence_of_tracking_modifiers5()
-        {
-            base.Precendence_of_tracking_modifiers5();
         }
     }
 }
