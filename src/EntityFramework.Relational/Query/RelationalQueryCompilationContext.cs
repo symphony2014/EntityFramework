@@ -27,13 +27,15 @@ namespace Microsoft.Data.Entity.Query
             [NotNull] ILinqOperatorProvider linqOperatorProvider,
             [NotNull] IQueryMethodProvider queryMethodProvider,
             [NotNull] Type contextType,
+            bool trackQueryResults,
             [NotNull] TelemetrySource telemetrySource)
             : base(
                 Check.NotNull(logger, nameof(logger)),
                 Check.NotNull(entityQueryModelVisitorFactory, nameof(entityQueryModelVisitorFactory)),
                 Check.NotNull(requiresMaterializationExpressionVisitorFactory, nameof(requiresMaterializationExpressionVisitorFactory)),
                 Check.NotNull(linqOperatorProvider, nameof(linqOperatorProvider)),
-                Check.NotNull(contextType, nameof(contextType)))
+                Check.NotNull(contextType, nameof(contextType)),
+                trackQueryResults)
         {
             Check.NotNull(queryMethodProvider, nameof(queryMethodProvider));
             Check.NotNull(telemetrySource, nameof(telemetrySource));

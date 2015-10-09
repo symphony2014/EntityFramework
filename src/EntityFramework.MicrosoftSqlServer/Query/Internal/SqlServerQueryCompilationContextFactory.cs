@@ -36,6 +36,7 @@ namespace Microsoft.Data.Entity.Query.Internal
                     new AsyncLinqOperatorProvider(),
                     new AsyncQueryMethodProvider(),
                     ContextType,
+                    TrackQueryResults,
                     TelemetrySource)
                 : new SqlServerQueryCompilationContext(
                     (ISensitiveDataLogger)Logger,
@@ -44,6 +45,7 @@ namespace Microsoft.Data.Entity.Query.Internal
                     new LinqOperatorProvider(),
                     new QueryMethodProvider(),
                     ContextType,
+                    TrackQueryResults,
                     TelemetrySource);
     }
 }

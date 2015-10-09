@@ -40,6 +40,7 @@ namespace Microsoft.Data.Entity.Query
                     new AsyncLinqOperatorProvider(),
                     new AsyncQueryMethodProvider(),
                     ContextType,
+                    TrackQueryResults,
                     TelemetrySource)
                 : new RelationalQueryCompilationContext(
                     (ISensitiveDataLogger)Logger,
@@ -48,6 +49,7 @@ namespace Microsoft.Data.Entity.Query
                     new LinqOperatorProvider(),
                     new QueryMethodProvider(),
                     ContextType,
+                    TrackQueryResults,
                     TelemetrySource);
     }
 }

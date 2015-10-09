@@ -20,6 +20,7 @@ namespace Microsoft.Data.Entity.Query.Internal
             [NotNull] ILinqOperatorProvider linqOpeartorProvider,
             [NotNull] IQueryMethodProvider queryMethodProvider,
             [NotNull] Type contextType,
+            bool trackQueryResults,
             [NotNull] TelemetrySource telemetrySource)
             : base(
                 Check.NotNull(logger, nameof(logger)),
@@ -28,6 +29,7 @@ namespace Microsoft.Data.Entity.Query.Internal
                 Check.NotNull(linqOpeartorProvider, nameof(linqOpeartorProvider)),
                 Check.NotNull(queryMethodProvider, nameof(queryMethodProvider)),
                 Check.NotNull(contextType, nameof(contextType)),
+                trackQueryResults,
                 Check.NotNull(telemetrySource, nameof(telemetrySource)))
         {
         }
