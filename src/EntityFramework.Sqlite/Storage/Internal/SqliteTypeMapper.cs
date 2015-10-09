@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using Microsoft.Data.Entity.Metadata;
+using Microsoft.Data.Entity.Utilities;
 
 namespace Microsoft.Data.Entity.Storage.Internal
 {
@@ -59,8 +59,11 @@ namespace Microsoft.Data.Entity.Storage.Internal
         /// </summary>
         public override RelationalTypeMapping GetMapping(string typeName)
         {
-            if (string.IsNullOrEmpty(typeName))
+            Check.NotNull(typeName, nameof(typeName));
+
+            if (typeName.Length == 0)
             {
+                // This may seem odd, but it's okay because we are matching SQLite's loose typing.
                 return _default;
             }
 

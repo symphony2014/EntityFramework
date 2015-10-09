@@ -11,11 +11,20 @@ namespace Microsoft.Data.Entity.Storage
 {
     public class RelationalTypeMapping
     {
-        public RelationalTypeMapping([NotNull] string defaultTypeName, [CanBeNull] Type clrType, DbType? storeType = null)
+        public static readonly RelationalTypeMapping NullMapping = new RelationalTypeMapping("NULL");
+
+        private RelationalTypeMapping([NotNull] string defaultTypeName)
         {
             Check.NotEmpty(defaultTypeName, nameof(defaultTypeName));
 
             DefaultTypeName = defaultTypeName;
+        }
+
+        public RelationalTypeMapping([NotNull] string defaultTypeName, [NotNull] Type clrType, DbType? storeType = null)
+            : this(defaultTypeName)
+        {
+            Check.NotNull(clrType, nameof(clrType));
+
             StoreType = storeType;
             ClrType = clrType;
         }
