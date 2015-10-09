@@ -65,7 +65,7 @@ namespace Microsoft.Data.Entity.Metadata.Internal
             return ConventionDispatcher.OnEntityTypeAdded(entityTypeBuilder);
         }
 
-        protected internal virtual bool IsIgnored([NotNull] string name, ConfigurationSource configurationSource)
+        public virtual bool IsIgnored([NotNull] string name, ConfigurationSource configurationSource)
         {
             Check.NotEmpty(name, nameof(name));
 

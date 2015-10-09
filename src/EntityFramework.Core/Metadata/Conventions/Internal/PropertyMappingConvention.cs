@@ -47,7 +47,6 @@ namespace Microsoft.Data.Entity.Metadata.Conventions.Internal
                             var targetType = FindCandidateNavigationPropertyType(actualProperty);
                             if (targetType != null)
                             {
-
                                 if (!modelBuilder.IsIgnored(targetType.FullName, ConfigurationSource.Convention))
                                 {
                                     throw new InvalidOperationException(CoreStrings.NavigationNotAdded(actualProperty.Name, entityType.Name));
@@ -58,7 +57,7 @@ namespace Microsoft.Data.Entity.Metadata.Conventions.Internal
                                 targetType = actualProperty.PropertyType;
                                 targetType = targetType.TryGetSequenceType() ?? targetType;
                                 targetType = targetType.UnwrapNullableType();
-                                if (targetType.IsInstantiable())
+                                if (!targetType.GetTypeInfo().IsInterface)
                                 {
                                     throw new InvalidOperationException(CoreStrings.PropertyNotAdded(actualProperty.Name, entityType.Name));
                                 }
